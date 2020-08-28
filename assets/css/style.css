@@ -1,3 +1,11 @@
-body {
-    background-color: red;
+#high-score {
+    text-align: left;
+}
+
+#timer{
+    text-align: right;
+}
+
+.start {
+    text-align: center;
 }
