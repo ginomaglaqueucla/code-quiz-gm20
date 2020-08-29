@@ -178,8 +178,12 @@ var endQuiz = function() {
 
 var highScoreHandler = function(){
     console.log("In high score");
-    var highScoreConainterEl = document.createElement('div')
+    var highScoreConainterEl = document.createElement('div');
+    var buttonContainerEl = document.createElement('div');
+
     var pHighScoresListEl = document.createElement('p');
+    var backButtonEl = document.createElement('span');
+    var clearButtonEl = document.createElement('span');
 
     // grab user initials input
     var initialsInput = document.querySelector("input[name='initials']").value;
@@ -195,7 +199,13 @@ var highScoreHandler = function(){
     // for loop to list high scores
     pHighScoresListEl.textContent = "1. " +highScoresArray[0].user + " - " +highScoresArray[0].score;
 
+    backButtonEl.innerHTML = "<button id='go-back' type='submit'>Go Back</button>"
+    clearButtonEl.innerHTML = "<button id='clear' type='submit'>Clear Scores</button>"
+    buttonContainerEl.appendChild(backButtonEl);
+    buttonContainerEl.appendChild(clearButtonEl);
+
     highScoreConainterEl.appendChild(pHighScoresListEl);
+    highScoreConainterEl.appendChild(buttonContainerEl)
 
     promptContainerDivEl.appendChild(highScoreConainterEl);
 
