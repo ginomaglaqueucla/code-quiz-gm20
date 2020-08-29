@@ -13,7 +13,29 @@ var questionArray = [
     question: "What is the syntax for printing to console?",
     choices: ["window.alert()", "printToConsole()", "console.log()", "Tomato"],
     answer: "console.log()"
+    },
+    {
+    question: "Which of the follow is NOT a data type?",
+    choices: ["String", "Object", "Array", "Cucumber"],
+    answer: "Watermelon"
+    },
+    {
+    question: "How do you declare an Array?",
+    choices: ["var array = {}", "var array = []", "var = array[]", "Apple"],
+    answer: "var array = []"
+    },
+    {
+    question: "What is an example of Camel Casing?",
+    choices: ["helloworld", "HelloWorld", "hello_world", "helloBanana"],
+    answer: "helloBanana"
+    },
+    {
+    question: "Which HTML element results in bigger text",
+    choices: ["<h1>", "<h2>", "<h3>", "Watermelon"],
+    answer: "<h1>"
     }
+
+
 ];
 
 var choicesButtonArray = [];
