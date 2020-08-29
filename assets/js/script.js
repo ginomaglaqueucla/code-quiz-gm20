@@ -38,6 +38,13 @@ var questionArray = [
     }
 ];
 
+var highScoresArray = [
+    {
+    user: "",
+    score: 0
+    }
+];
+
 var choicesButtonArray = [];
 
 var questionCounter = 0;
@@ -171,18 +178,26 @@ var endQuiz = function() {
 
 var highScoreHandler = function(){
     console.log("In high score");
-    var h1HighScoresEl = document.querySelector('#main');
+    var highScoreConainterEl = document.createElement('div')
     var pHighScoresListEl = document.createElement('p');
 
     // grab user initials input
     var initialsInput = document.querySelector("input[name='initials']").value;
     console.log(initialsInput);
+    highScoresArray[0].score = score;
+    highScoresArray[0].user = initialsInput;
 
     // remove HTML
     promptContainerDivEl.removeChild(promptContainerDivEl.lastChild);
 
     // set content
     h1El.textContent = "High Scores";
+    // for loop to list high scores
+    pHighScoresListEl.textContent = "1. " +highScoresArray[0].user + " - " +highScoresArray[0].score;
+
+    highScoreConainterEl.appendChild(pHighScoresListEl);
+
+    promptContainerDivEl.appendChild(highScoreConainterEl);
 
 
 }
