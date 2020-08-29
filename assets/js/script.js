@@ -59,14 +59,11 @@ var startQuizHandler = function() {
     displayQuestion(choicesButtonArray);
     timeLeft = 75
     timer();
-    timeLeft--;
 
     // start timer and set up following questions
     var timeInterval = setInterval(function() {
         timer();
         displayQuestion(choicesButtonArray);
-        timeLeft--;
-        
     }, 1000)
     
 };
@@ -95,21 +92,22 @@ var checkAnswerHandler = function(event) {
     // correct answer
     var correctAnswer = questionArray[questionCounter].answer;
 
+    // Will increment counter after first question
+    if (!startQuizFlag) {
+        startQuizFlag = true;
+        return;
+    } else {
+        questionCounter++;
+    }
+    
     // check if answer is correct
     if (userAnswer.textContent === correctAnswer){
         console.log("Good");
     }
     else {
+        timeLeft = timeLeft - 5;
         console.log("BAD");
     }
-
-    // Will increment counter after first question
-    if (!startQuizFlag) {
-        startQuizFlag = true;
-    } else {
-        questionCounter++;
-    }
-
     // displayQuestion(choicesButtonArray);
  }
 
@@ -120,6 +118,7 @@ var checkAnswerHandler = function(event) {
     } else {
         timerEl.textContent = timeLeft;
     }
+    timeLeft--;
  }
 
 
