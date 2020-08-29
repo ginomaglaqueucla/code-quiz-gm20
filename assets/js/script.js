@@ -3,6 +3,7 @@ var h1El = document.querySelector('#main');
 var pEl = document.querySelector('#secondary');
 var choiceContainerEl = document.querySelector('.btn');
 var timerEl = document.querySelector('#timer');
+var promptContainerDivEl = document.querySelector('#prompt-container')
 
 var questionArray = [
     {
@@ -140,13 +141,29 @@ var endQuizCheck = function() {
 };
 
 var endQuiz = function() {
-     choiceContainerEl.remove();
+    choiceContainerEl.remove();
 
-     var pScoreEl = document.createElement('p');
-     // place class name here for styling
+    // New element for display score
+    var pScoreEl = document.createElement('p');
+    // place class name here for styling
+    // *** PLACE CODE HERE ****
 
+    // New element to submit high score container
+    var divInputInitialsConatinerEl = document.createElement('div')
+    // New elements to enter initials
+    var pFixedMsg = document.createElement('p');
+    var pInput = document.createElement('p');
+     
      h1El.textContent = "All Done!";
-     pEl.textContent = "Your final score:" + score;
+     pScoreEl.textContent = "Your final score:" + score;
+     pInput.innerHTML = "Enter Initials: <input type='text' name='initials' class='text-input'/><button id='submit-score' type='submit'>Submit</button>"
+
+
+     divInputInitialsConatinerEl.appendChild(pScoreEl);
+     divInputInitialsConatinerEl.appendChild(pInput);
+
+     promptContainerDivEl.appendChild(divInputInitialsConatinerEl);
 };
+
 buttonEl.addEventListener('click', startQuizHandler);
 choiceContainerEl.addEventListener('click', checkAnswerHandler);
