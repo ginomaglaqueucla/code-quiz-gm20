@@ -40,6 +40,7 @@ var choicesButtonArray = [];
 
 var questionCounter = 0;
 var startQuizFlag = false;
+var timeEndFlag = false;
 var timeLeft = 0;
 
 var startQuizHandler = function() {
@@ -56,33 +57,41 @@ var startQuizHandler = function() {
     ];
 
     // Initialize first question and timer
-    displayQuestion(choicesButtonArray);
+    // displayQuestion(choicesButtonArray);
     timeLeft = 75
     timer();
 
     // start timer and set up following questions
     var timeInterval = setInterval(function() {
         timer();
-        displayQuestion(choicesButtonArray);
+        endQuizCheck();
+        if(timeEndFlag) {
+            clearInterval(timeInterval);
+        }
     }, 1000)
+    displayQuestion(choicesButtonArray);
     
 };
 
 var displayQuestion = function(choicesButtonArray) {
-    // Display question
-    h1El.textContent = questionArray[questionCounter].question;
+    if (questionCounter < questionArray.length){
+        // Display question
+        h1El.textContent = questionArray[questionCounter].question;
 
-    choicesButtonArray[0].textContent = questionArray[questionCounter].choices[0];
-    choiceContainerEl.appendChild(choicesButtonArray[0]);
+        choicesButtonArray[0].textContent = questionArray[questionCounter].choices[0];
+        choiceContainerEl.appendChild(choicesButtonArray[0]);
 
-    choicesButtonArray[1].textContent = questionArray[questionCounter].choices[1];
-    choiceContainerEl.appendChild(choicesButtonArray[1]);
+        choicesButtonArray[1].textContent = questionArray[questionCounter].choices[1];
+        choiceContainerEl.appendChild(choicesButtonArray[1]);
 
-    choicesButtonArray[2].textContent = questionArray[questionCounter].choices[2];
-    choiceContainerEl.appendChild(choicesButtonArray[2]);
+        choicesButtonArray[2].textContent = questionArray[questionCounter].choices[2];
+        choiceContainerEl.appendChild(choicesButtonArray[2]);
 
-    choicesButtonArray[3].textContent = questionArray[questionCounter].choices[3];
-    choiceContainerEl.appendChild(choicesButtonArray[3]);
+        choicesButtonArray[3].textContent = questionArray[questionCounter].choices[3];
+        choiceContainerEl.appendChild(choicesButtonArray[3]);
+    } else {
+        timeLeft = 0;
+    }
 };
 
 var checkAnswerHandler = function(event) {
@@ -99,7 +108,7 @@ var checkAnswerHandler = function(event) {
     } else {
         questionCounter++;
     }
-    
+
     // check if answer is correct
     if (userAnswer.textContent === correctAnswer){
         console.log("Good");
@@ -108,17 +117,20 @@ var checkAnswerHandler = function(event) {
         timeLeft = timeLeft - 5;
         console.log("BAD");
     }
-    // displayQuestion(choicesButtonArray);
+    displayQuestion(choicesButtonArray);
  }
 
  var timer = function() {
-    if(timeLeft === 0) {
-        timerEl.textContent = timeLeft;
-        return;
-    } else {
-        timerEl.textContent = timeLeft;
-    }
+    timerEl.textContent = timeLeft;
     timeLeft--;
+ }
+
+ var endQuizCheck = function() {
+    if (timeLeft < 0) {
+        timeEndFlag = true;
+        console.log("End of quiz!");
+        // endQuiz();
+    }
  }
 
 
