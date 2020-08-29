@@ -167,12 +167,12 @@ var endQuiz = function() {
 
     submitButton.addEventListener('click', highScoreHandler);
 
-
 };
 
 var highScoreHandler = function(){
     console.log("In high score");
     var h1HighScoresEl = document.querySelector('#main');
+    var pHighScoresListEl = document.createElement('p');
 
     // grab user initials input
     var initialsInput = document.querySelector("input[name='initials']").value;
@@ -180,6 +180,9 @@ var highScoreHandler = function(){
 
     // remove HTML
     promptContainerDivEl.removeChild(promptContainerDivEl.lastChild);
+
+    // set content
+    h1El.textContent = "High Scores";
 
 
 }
