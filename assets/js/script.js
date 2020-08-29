@@ -45,6 +45,7 @@ var startQuizFlag = false;
 var timeEndFlag = false;
 var timeLeft = 0;
 var score = 0;
+var initials;
 
 var startQuizHandler = function() {
     // remove start quiz button
@@ -154,16 +155,27 @@ var endQuiz = function() {
     var pFixedMsg = document.createElement('p');
     var pInput = document.createElement('p');
      
-     h1El.textContent = "All Done!";
-     pScoreEl.textContent = "Your final score:" + score;
-     pInput.innerHTML = "Enter Initials: <input type='text' name='initials' class='text-input'/><button id='submit-score' type='submit'>Submit</button>"
+    h1El.textContent = "All Done!";
+    pScoreEl.textContent = "Your final score:" + score;
+    pInput.innerHTML = "Enter Initials: <input type='text' name='initials' class='text-input'/><button id='submit-score' type='submit'>Submit</button>"
+
+    divInputInitialsConatinerEl.appendChild(pScoreEl);
+    divInputInitialsConatinerEl.appendChild(pInput);
+    promptContainerDivEl.appendChild(divInputInitialsConatinerEl);
+
+    // grab initials from user
 
 
-     divInputInitialsConatinerEl.appendChild(pScoreEl);
-     divInputInitialsConatinerEl.appendChild(pInput);
+    pInput.addEventListener('click', highScoreHandler);
 
-     promptContainerDivEl.appendChild(divInputInitialsConatinerEl);
+
 };
+
+var highScoreHandler = function(){
+    console.log("In high score");
+    var initialsInput = document.querySelector("input[name='initials']").value;
+    console.log(initialsInput);
+}
 
 buttonEl.addEventListener('click', startQuizHandler);
 choiceContainerEl.addEventListener('click', checkAnswerHandler);
