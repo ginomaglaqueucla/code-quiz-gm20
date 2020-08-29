@@ -1,5 +1,6 @@
 var buttonEl =  document.querySelector('#start-quiz');
-var h1El = document.querySelector('#question');
+var h1El = document.querySelector('#main');
+var pEl = document.querySelector('#secondary');
 var choiceContainerEl = document.querySelector('.btn');
 var timerEl = document.querySelector('#timer');
 
@@ -42,10 +43,14 @@ var questionCounter = 0;
 var startQuizFlag = false;
 var timeEndFlag = false;
 var timeLeft = 0;
+var score = 0;
 
 var startQuizHandler = function() {
     // remove start quiz button
     buttonEl.remove();
+
+    // remove instructions prompt
+    pEl.remove();
     // create choice buttons
     var choiceButton1El = document.createElement('button');
     var choiceButton2El = document.createElement('button');
@@ -111,6 +116,7 @@ var checkAnswerHandler = function(event) {
 
     // check if answer is correct
     if (userAnswer.textContent === correctAnswer){
+        score++;
         console.log("Good");
     }
     else {
@@ -118,21 +124,29 @@ var checkAnswerHandler = function(event) {
         console.log("BAD");
     }
     displayQuestion(choicesButtonArray);
- }
+}
 
- var timer = function() {
+var timer = function() {
     timerEl.textContent = timeLeft;
     timeLeft--;
- }
+}
 
- var endQuizCheck = function() {
+var endQuizCheck = function() {
     if (timeLeft < 0) {
         timeEndFlag = true;
         console.log("End of quiz!");
-        // endQuiz();
+        endQuiz();
     }
- }
+};
 
+var endQuiz = function() {
+     choiceContainerEl.remove();
 
+     var pScoreEl = document.createElement('p');
+     // place class name here for styling
+
+     h1El.textContent = "All Done!";
+     pEl.textContent = "Your final score:" + score;
+};
 buttonEl.addEventListener('click', startQuizHandler);
 choiceContainerEl.addEventListener('click', checkAnswerHandler);
