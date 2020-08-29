@@ -1,7 +1,7 @@
-var buttonEl =  document.querySelector("#start-quiz");
-// var divButtonEl = document.querySelector("#btn");
-var h1El = document.querySelector("#question");
-var choiceContainerEl = document.querySelector(".btn");
+var buttonEl =  document.querySelector('#start-quiz');
+var h1El = document.querySelector('#question');
+var choiceContainerEl = document.querySelector('.btn');
+var timerEl = document.querySelector('#timer');
 
 var questionArray = [
     {
@@ -40,19 +40,35 @@ var choicesButtonArray = [];
 
 var questionCounter = 0;
 var startQuizFlag = false;
+var timeLeft = 0;
+
 var startQuizHandler = function() {
     // remove start quiz button
     buttonEl.remove();
     // create choice buttons
-    var choiceButton1El = document.createElement("button");;
-    var choiceButton2El = document.createElement("button");
-    var choiceButton3El = document.createElement("button");
-    var choiceButton4El = document.createElement("button");
+    var choiceButton1El = document.createElement('button');
+    var choiceButton2El = document.createElement('button');
+    var choiceButton3El = document.createElement('button');
+    var choiceButton4El = document.createElement('button');
 
     choicesButtonArray = [
         choiceButton1El, choiceButton2El, choiceButton3El, choiceButton4El
     ];
-    displayQuestion(choicesButtonArray);    
+
+    // Initialize first question and timer
+    displayQuestion(choicesButtonArray);
+    timeLeft = 75
+    timer();
+    timeLeft--;
+
+    // start timer and set up following questions
+    var timeInterval = setInterval(function() {
+        timer();
+        displayQuestion(choicesButtonArray);
+        timeLeft--;
+        
+    }, 1000)
+    
 };
 
 var displayQuestion = function(choicesButtonArray) {
@@ -73,7 +89,6 @@ var displayQuestion = function(choicesButtonArray) {
 };
 
 var checkAnswerHandler = function(event) {
-
     // grab user answer from button click
     var userAnswer = event.target;
 
@@ -95,13 +110,18 @@ var checkAnswerHandler = function(event) {
         questionCounter++;
     }
 
-    displayQuestion(choicesButtonArray);
+    // displayQuestion(choicesButtonArray);
+ }
 
-    
+ var timer = function() {
+    if(timeLeft === 0) {
+        timerEl.textContent = timeLeft;
+        return;
+    } else {
+        timerEl.textContent = timeLeft;
+    }
  }
 
 
-
-
-buttonEl.addEventListener("click", startQuizHandler);
-choiceContainerEl.addEventListener("click", checkAnswerHandler);
+buttonEl.addEventListener('click', startQuizHandler);
+choiceContainerEl.addEventListener('click', checkAnswerHandler);
