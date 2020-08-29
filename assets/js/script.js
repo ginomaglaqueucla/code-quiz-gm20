@@ -163,18 +163,25 @@ var endQuiz = function() {
     divInputInitialsConatinerEl.appendChild(pInput);
     promptContainerDivEl.appendChild(divInputInitialsConatinerEl);
 
-    // grab initials from user
+    var submitButton = document.querySelector('#submit-score');
 
-
-    pInput.addEventListener('click', highScoreHandler);
+    submitButton.addEventListener('click', highScoreHandler);
 
 
 };
 
 var highScoreHandler = function(){
     console.log("In high score");
+    var h1HighScoresEl = document.querySelector('#main');
+
+    // grab user initials input
     var initialsInput = document.querySelector("input[name='initials']").value;
     console.log(initialsInput);
+
+    // remove HTML
+    promptContainerDivEl.removeChild(promptContainerDivEl.lastChild);
+
+
 }
 
 buttonEl.addEventListener('click', startQuizHandler);
