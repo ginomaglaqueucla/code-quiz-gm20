@@ -191,19 +191,18 @@ var highScoreHandler = function(){
         scoreSaved: score
     };
 
-    console.log(tempObject);
+    // display array
+    var diplayScoresArray = [];
 
     //add new score and initials to array
-    highScoresArray = localStorage.getItem("highScores");
-    highScoresArray = JSON.parse(highScoresArray);
-    if(highScoresArray === null) {
+   var localStorageContents = localStorage.getItem("highScores");
+   
+   if(localStorageContents === null) {
         highScoresArray = tempObject;
     } else {
+        highScoresArray = [JSON.parse(localStorageContents)];
         highScoresArray.push(tempObject);
     }
-
-    console.log(highScoresArray);
-
 
     // store local
     localStorage.setItem("highScores", JSON.stringify(highScoresArray));
@@ -214,16 +213,23 @@ var highScoreHandler = function(){
     // set content
     h1El.textContent = "High Scores";
     // for loop to list high scores
-    for(var i = 0; i < highScoresArray.length; i++) {
-        pHighScoresListEl.textContent = "1. " +highScoresArray[i].user + " - " +highScoresArray[i].score;
+
+    pHighScoresListEl.textContent = "1. " +highScoresArray.user + " - " +highScoresArray.scoreSaved;
+    highScoreConainterEl.appendChild(pHighScoresListEl);
+
+    for(var i = 1; i < highScoresArray.length; i++) {
+        
+        pHighScoresListEl.textContent = i+". " +highScoresArray[i].user + " - " +highScoresArray[i].scoreSaved;
+        highScoreConainterEl.appendChild(pHighScoresListEl);
+        promptContainerDivEl.appendChild(highScoreConainterEl);
+
     }
-    
     backButtonEl.innerHTML = "<button id='go-back' type='submit'>Go Back</button>"
     clearButtonEl.innerHTML = "<button id='clear' type='submit'>Clear Scores</button>"
     buttonContainerEl.appendChild(backButtonEl);
     buttonContainerEl.appendChild(clearButtonEl);
 
-    highScoreConainterEl.appendChild(pHighScoresListEl);
+
     highScoreConainterEl.appendChild(buttonContainerEl)
 
     promptContainerDivEl.appendChild(highScoreConainterEl);
