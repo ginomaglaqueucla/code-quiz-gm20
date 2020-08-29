@@ -17,7 +17,7 @@ var questionArray = [
     {
     question: "Which of the follow is NOT a data type?",
     choices: ["String", "Object", "Array", "Cucumber"],
-    answer: "Watermelon"
+    answer: "Cucumber"
     },
     {
     question: "How do you declare an Array?",
@@ -34,8 +34,6 @@ var questionArray = [
     choices: ["<h1>", "<h2>", "<h3>", "Watermelon"],
     answer: "<h1>"
     }
-
-
 ];
 
 var choicesButtonArray = [];
