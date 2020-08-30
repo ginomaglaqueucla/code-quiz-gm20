@@ -43,7 +43,7 @@ var highScoresArray = [{}
 ];
 
 var choicesButtonArray = [];
-var quizTakenCounter = 0;
+var quizTakenCounter;
 var questionCounter = 0;
 var startQuizFlag = false;
 var timeEndFlag = false;
@@ -52,6 +52,8 @@ var score = 0;
 var initials;
 
 var startQuizHandler = function() {
+
+  //  localStorage.setItem("quizTakenCounter", JSON.stringify(quizTakenCounter));
     // remove start quiz button
     buttonEl.remove();
 
@@ -174,10 +176,11 @@ var endQuiz = function() {
 };
 
 var highScoreHandler = function(){
+    //collect most recent
+    quizTakenCounter = JSON.parse(localStorage.getItem("quizTakenCounter"));
     // increment quiz counter
     quizTakenCounter++;
     localStorage.setItem("quizTakenCounter", JSON.stringify(quizTakenCounter));
-    localStorage.setItem("quizTakenCounter", quizTakenCounter);
 
     console.log("In high score");
     var highScoreConainterEl = document.createElement('div');
@@ -199,6 +202,7 @@ var highScoreHandler = function(){
 
     // display array
     var displayArray = [];
+    var display;
 
     //add new score and initials to array
 //    var localStorageContents = localStorage.getItem("highScores");
@@ -211,13 +215,11 @@ var highScoreHandler = function(){
 //         highScoresArray.push(tempObject);
 //     }
 
-    var tempCounter = JSON.parse(localStorage.getItem("quizTakenCounter"));
+    
 
     // store local
-    for(var i = 0; i < tempCounter; i++ ){
-        localStorage.setItem("highScores"+(i+1), JSON.stringify(tempObject));
-        console.log("fesf");
-    }
+    localStorage.setItem("highScores"+quizTakenCounter, JSON.stringify(tempObject));
+
 
 
     // remove HTML
@@ -225,19 +227,29 @@ var highScoreHandler = function(){
 
     // set content
     h1El.textContent = "High Scores";
-    // for loop to list high scores
 
-    if(highScoresArray.length === undefined) {
-        pHighScoresListEl.textContent = "1. " +highScoresArray.user + " - " +highScoresArray.scoreSaved;
-        highScoreConainterEl.appendChild(pHighScoresListEl);
-    } 
-    else {
-        for(var i = 0; i < highScoresArray.length; i++) {
-            pHighScoresListTempEl.textContent = i+1+". " +highScoresArray[i].user + " - " +highScoresArray[i].scoreSaved;
-            displayArray[i] = pHighScoresListTempEl;
-            highScoreConainterEl.appendChild(displayArray[i]);
-        }
+    // for loop to list high scores
+    for(var i = 0; i < quizTakenCounter; i++ ){
+        display = JSON.parse(localStorage.getItem("highScores"+(i+1)));
+        console.log(display);
+
+        pHighScoresListTempEl.textContent = i+1+". " +display.user + " - " +display.scoreSaved;
+        displayArray[i] = pHighScoresListTempEl;
+        highScoreConainterEl.appendChild(displayArray[i]);
+        
     }
+
+    // if(highScoresArray.length === undefined) {
+    //     pHighScoresListEl.textContent = "1. " +highScoresArray.user + " - " +highScoresArray.scoreSaved;
+    //     highScoreConainterEl.appendChild(pHighScoresListEl);
+    // } 
+    // else {
+    //     for(var i = 0; i < highScoresArray.length; i++) {
+    //         pHighScoresListTempEl.textContent = i+1+". " +highScoresArray[i].user + " - " +highScoresArray[i].scoreSaved;
+    //         displayArray[i] = pHighScoresListTempEl;
+    //         highScoreConainterEl.appendChild(displayArray[i]);
+    //     }
+    // }
 
 
 
