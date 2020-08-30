@@ -9,3 +9,34 @@
 .start {
     text-align: center;
 }
+
+body {
+    font-family: Helvetica;
+}
+
+#main {
+    font-size: xx-large;
+}
+
+.btn{
+    color: white;
+    border-radius: 4px;
+    background-color: plum;
+    font-size: 125%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: block;
+
+}
+
+.choice-btn{
+    font-size: 200%;
+}
+
+#submit-score{
+    margin: 5px;
+    display: inline;
+}

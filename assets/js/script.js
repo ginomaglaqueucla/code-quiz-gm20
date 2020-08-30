@@ -1,7 +1,7 @@
 var buttonEl =  document.querySelector('#start-quiz');
 var h1El = document.querySelector('#main');
 var pEl = document.querySelector('#secondary');
-var choiceContainerEl = document.querySelector('.btn');
+var choiceContainerEl = document.querySelector('#btn-container');
 var timerEl = document.querySelector('#timer');
 var promptContainerDivEl = document.querySelector('#prompt-container');
 var aViewHighScoreTag = document.querySelector('#viewHS');
@@ -9,32 +9,32 @@ var aViewHighScoreTag = document.querySelector('#viewHS');
 var questionArray = [
     {
     question: "Which of the following styles a web application?",
-    choices: ["HTML", "CSS", "JavaScript", "Potato"],
+    choices: ["1. HTML", "2. CSS", "3. JavaScript", "4. Potato"],
     answer: "CSS"
     },
     {
     question: "What is the syntax for printing to console?",
-    choices: ["window.alert()", "printToConsole()", "console.log()", "Tomato"],
+    choices: ["1. window.alert()", "2. printToConsole()", "3. console.log()", "4. Tomato"],
     answer: "console.log()"
     },
     {
     question: "Which of the follow is NOT a data type?",
-    choices: ["String", "Object", "Array", "Cucumber"],
+    choices: ["1. String", "2. Object", "3. Array", "4. Cucumber"],
     answer: "Cucumber"
     },
     {
     question: "How do you declare an Array?",
-    choices: ["var array = {}", "var array = []", "var = array[]", "Apple"],
+    choices: ["1. var array = {}", "2. var array = []", "3. var = array[]", "4. Apple"],
     answer: "var array = []"
     },
     {
     question: "What is an example of Camel Casing?",
-    choices: ["helloworld", "HelloWorld", "hello_world", "helloBanana"],
+    choices: ["1. helloworld", "2. HelloWorld", "3. hello_world", "4. helloBanana"],
     answer: "helloBanana"
     },
     {
     question: "Which HTML element results in bigger text",
-    choices: ["<h1>", "<h2>", "<h3>", "Watermelon"],
+    choices: ["1. <h1>", "2. <h2>", "3. <h3>", "4. Watermelon"],
     answer: "<h1>"
     }
 ];
@@ -62,9 +62,13 @@ var startQuizHandler = function() {
     pEl.remove();
     // create choice buttons
     var choiceButton1El = document.createElement('button');
+    choiceButton1El.className = "btn choice-btn";
     var choiceButton2El = document.createElement('button');
+    choiceButton2El.className = "btn choice-btn";
     var choiceButton3El = document.createElement('button');
+    choiceButton3El.className = "btn choice-btn";
     var choiceButton4El = document.createElement('button');
+    choiceButton4El.className = "btn choice-btn";
 
     choicesButtonArray = [
         choiceButton1El, choiceButton2El, choiceButton3El, choiceButton4El
@@ -88,6 +92,7 @@ var startQuizHandler = function() {
 };
 
 var displayQuestion = function(choicesButtonArray) {
+    
     if (questionCounter < questionArray.length){
         // Display question
         h1El.textContent = questionArray[questionCounter].question;
@@ -164,7 +169,7 @@ var endQuiz = function() {
      
     h1El.textContent = "All Done!";
     pScoreEl.textContent = "Your final score:" + score;
-    pInput.innerHTML = "Enter Initials: <input type='text' name='initials' class='text-input'/><button id='submit-score' type='submit'>Submit</button>"
+    pInput.innerHTML = "Enter Initials: <input type='text' name='initials' class='text-input'/><button class='btn' id='submit-score' type='submit'>Submit</button>"
 
     divInputInitialsConatinerEl.appendChild(pScoreEl);
     divInputInitialsConatinerEl.appendChild(pInput);
@@ -238,8 +243,8 @@ var displayHighScore = function() {
     promptContainerDivEl.appendChild(highScoreContainerEl);
 
     // defining buttons
-    backButtonEl.innerHTML = "<button id='go-back' type='submit'>Go Back</button>"
-    clearButtonEl.innerHTML = "<button id='clear' type='submit'>Clear Scores</button>"
+    backButtonEl.innerHTML = "<button class='btn' id='go-back' type='submit'>Go Back</button>"
+    clearButtonEl.innerHTML = "<button class='btn' id='clear' type='submit'>Clear Scores</button>"
    
     buttonContainerEl.appendChild(backButtonEl);
     buttonContainerEl.appendChild(clearButtonEl);
