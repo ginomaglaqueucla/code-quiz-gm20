@@ -204,19 +204,6 @@ var highScoreHandler = function(){
     var displayArray = [];
     var display;
 
-    //add new score and initials to array
-//    var localStorageContents = localStorage.getItem("highScores");
-   
-//    if(localStorageContents === null) {
-//         highScoresArray = tempObject;
-//     } else {
-//         highScoresArray = JSON.parse(localStorageContents);
-//         console.log(highScoresArray);
-//         highScoresArray.push(tempObject);
-//     }
-
-    
-
     // store local
     localStorage.setItem("highScores"+quizTakenCounter, JSON.stringify(tempObject));
 
@@ -239,20 +226,6 @@ var highScoreHandler = function(){
         console.log(displayArray[i]);
         highScoreConainterEl.appendChild(displayArray[i]);  
     }
-
-    // if(highScoresArray.length === undefined) {
-    //     pHighScoresListEl.textContent = "1. " +highScoresArray.user + " - " +highScoresArray.scoreSaved;
-    //     highScoreConainterEl.appendChild(pHighScoresListEl);
-    // } 
-    // else {
-    //     for(var i = 0; i < highScoresArray.length; i++) {
-    //         pHighScoresListTempEl.textContent = i+1+". " +highScoresArray[i].user + " - " +highScoresArray[i].scoreSaved;
-    //         displayArray[i] = pHighScoresListTempEl;
-    //         highScoreConainterEl.appendChild(displayArray[i]);
-    //     }
-    // }
-
-    // highScoreConainterEl.appendChild(pHighScoresListEl);
     
     promptContainerDivEl.appendChild(highScoreConainterEl);
 
@@ -266,6 +239,18 @@ var highScoreHandler = function(){
 
     promptContainerDivEl.appendChild(highScoreConainterEl);
 
+    // Event Listener for buttons
+    backButtonEl.addEventListener('click', refreshBrowser);
+    clearButtonEl.addEventListener('click', clearStorage );
+
+}
+
+var refreshBrowser = function() {
+    location.reload(true);
+}
+
+var clearStorage = function(){
+    localStorage.clear();
 }
 
 buttonEl.addEventListener('click', startQuizHandler);
