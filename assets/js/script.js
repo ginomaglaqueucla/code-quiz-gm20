@@ -176,6 +176,7 @@ var endQuiz = function() {
 };
 
 var highScoreHandler = function(){
+    event.preventDefault();
     //collect most recent
     quizTakenCounter = JSON.parse(localStorage.getItem("quizTakenCounter"));
     // increment quiz counter
@@ -184,10 +185,13 @@ var highScoreHandler = function(){
 
     console.log("In high score");
     var highScoreConainterEl = document.createElement('div');
+    highScoreConainterEl.className = 'high-scores';
     var buttonContainerEl = document.createElement('div');
+    
 
     var pHighScoresListEl = document.createElement('p');
     var pHighScoresListTempEl = document.createElement('p');
+    pHighScoresListTempEl.className = 'init-scores';
     var backButtonEl = document.createElement('span');
     var clearButtonEl = document.createElement('span');
 
@@ -218,12 +222,12 @@ var highScoreHandler = function(){
     // for loop to list high scores
     for(var i = 0; i < quizTakenCounter; i++ ){
         display = JSON.parse(localStorage.getItem("highScores"+(i+1)));
-        console.log(display);
+        // console.log(display);
 
         pHighScoresListTempEl.textContent = i+1+". " +display.user + " - " +display.scoreSaved;
         displayArray[i] = pHighScoresListTempEl;
-        console.log(i);
-        console.log(displayArray[i]);
+        // console.log(i);
+        // console.log(displayArray[i]);
         highScoreConainterEl.appendChild(displayArray[i]);  
     }
     
@@ -235,14 +239,15 @@ var highScoreHandler = function(){
     buttonContainerEl.appendChild(clearButtonEl);
 
 
-    highScoreConainterEl.appendChild(buttonContainerEl)
+    
 
     promptContainerDivEl.appendChild(highScoreConainterEl);
 
+    promptContainerDivEl.appendChild(buttonContainerEl)
+
     // Event Listener for buttons
     backButtonEl.addEventListener('click', refreshBrowser);
-    clearButtonEl.addEventListener('click', clearStorage );
-
+    clearButtonEl.addEventListener('click', clearStorage);
 }
 
 var refreshBrowser = function() {
@@ -251,6 +256,8 @@ var refreshBrowser = function() {
 
 var clearStorage = function(){
     localStorage.clear();
+    var highScoreConainterEl = document.querySelector('.high-scores');
+    highScoreConainterEl.remove();
 }
 
 buttonEl.addEventListener('click', startQuizHandler);
