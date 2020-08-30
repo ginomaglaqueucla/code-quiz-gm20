@@ -178,85 +178,87 @@ var endQuiz = function() {
 
 var highScoreHandler = function(){
     event.preventDefault();
+    
     //collect most recent
     quizTakenCounter = JSON.parse(localStorage.getItem("quizTakenCounter"));
     // increment quiz counter
     quizTakenCounter++;
     localStorage.setItem("quizTakenCounter", JSON.stringify(quizTakenCounter));
-    
-    var highScoreConainterEl = document.createElement('div');
-    highScoreConainterEl.className = 'high-scores';
-    var buttonContainerEl = document.createElement('div');
-    
-
-    var pHighScoresListEl = document.createElement('p');
-    var pHighScoresListTempEl = document.createElement('p');
-    pHighScoresListTempEl.className = 'init-scores';
-    var backButtonEl = document.createElement('span');
-    var clearButtonEl = document.createElement('span');
 
     // grab user initials input
     var initialsInput = document.querySelector("input[name='initials']").value;
+
     
+
     // index where to add new entry
     var tempObject = {
         user: initialsInput,
         scoreSaved: score
     };
 
-    // display array
-    var displayArray = [];
-    var display;
-
     // store local
     localStorage.setItem("highScores"+quizTakenCounter, JSON.stringify(tempObject));
 
+    displayHighScore();
+}
 
-
+var displayHighScore = function() {
     // remove HTML
     promptContainerDivEl.removeChild(promptContainerDivEl.lastChild);
+    pEl.remove();
+    buttonEl.remove();
 
-    // set content
+    //collect most recent
+    quizTakenCounter = JSON.parse(localStorage.getItem("quizTakenCounter"));
+
+    console.log("In highscore");
+    // container for High Score List
+    var highScoreContainerEl = document.createElement('div');
+    highScoreContainerEl.className = 'high-scores';
+
+    // container for buttons
+    var buttonContainerEl = document.createElement('div');
+    var backButtonEl = document.createElement('span');
+    var clearButtonEl = document.createElement('span');
+
+    // Display "High Scores"
     h1El.textContent = "High Scores";
 
-    // for loop to list high scores
-    for(var i = 0; i < quizTakenCounter; i++ ){
-        display = JSON.parse(localStorage.getItem("highScores"+(i+1)));
-        // console.log(display);
-
-        pHighScoresListTempEl.textContent = i+1+". " +display.user + " - " +display.scoreSaved;
-        displayArray[i] = pHighScoresListTempEl;
-        // console.log(i);
-        // console.log(displayArray[i]);
-        highScoreConainterEl.appendChild(displayArray[i]);  
+    var temp;
+    // for loop goes through every locally stored item
+    for(var i = 0; i < quizTakenCounter; i++){
+        temp = JSON.parse(localStorage.getItem("highScores"+(i+1)));
+        var pHSEntryEl = document.createElement('div');
+        pHSEntryEl.textContent = i+1+". " +temp.user + " - " +temp.scoreSaved;
+        highScoreContainerEl.appendChild(pHSEntryEl);
     }
-    
-    promptContainerDivEl.appendChild(highScoreConainterEl);
 
+    promptContainerDivEl.appendChild(highScoreContainerEl);
+
+    // defining buttons
     backButtonEl.innerHTML = "<button id='go-back' type='submit'>Go Back</button>"
     clearButtonEl.innerHTML = "<button id='clear' type='submit'>Clear Scores</button>"
+   
     buttonContainerEl.appendChild(backButtonEl);
     buttonContainerEl.appendChild(clearButtonEl);
-
-    promptContainerDivEl.appendChild(highScoreConainterEl);
-
     promptContainerDivEl.appendChild(buttonContainerEl)
 
     // Event Listener for buttons
     backButtonEl.addEventListener('click', refreshBrowser);
     clearButtonEl.addEventListener('click', clearStorage);
-}
+
+};
 
 var refreshBrowser = function() {
     location.reload(true);
-}
+};
 
 var clearStorage = function(){
     localStorage.clear();
     var highScoreConainterEl = document.querySelector('.high-scores');
     highScoreConainterEl.remove();
-}
+};
 
 buttonEl.addEventListener('click', startQuizHandler);
 choiceContainerEl.addEventListener('click', checkAnswerHandler);
-aViewHighScoreTag.addEventListener('click', highScoreHandler);
+aViewHighScoreTag.addEventListener('click', displayHighScore);
