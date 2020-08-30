@@ -235,8 +235,9 @@ var highScoreHandler = function(){
 
         pHighScoresListTempEl.textContent = i+1+". " +display.user + " - " +display.scoreSaved;
         displayArray[i] = pHighScoresListTempEl;
-        highScoreConainterEl.appendChild(displayArray[i]);
-        
+        console.log(i);
+        console.log(displayArray[i]);
+        highScoreConainterEl.appendChild(displayArray[i]);  
     }
 
     // if(highScoresArray.length === undefined) {
@@ -251,11 +252,8 @@ var highScoreHandler = function(){
     //     }
     // }
 
-
-
-
-
     // highScoreConainterEl.appendChild(pHighScoresListEl);
+    
     promptContainerDivEl.appendChild(highScoreConainterEl);
 
     backButtonEl.innerHTML = "<button id='go-back' type='submit'>Go Back</button>"
