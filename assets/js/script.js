@@ -141,7 +141,7 @@ var checkAnswerHandler = function(event) {
 }
 
 var timer = function() {
-    timerEl.textContent = timeLeft;
+    timerEl.textContent = 'Timer: '+timeLeft;
     timeLeft--;
 }
 
