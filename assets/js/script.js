@@ -203,10 +203,12 @@ var highScoreHandler = function(){
 }
 
 var displayHighScore = function() {
+    console.log(event);
     // remove HTML
     promptContainerDivEl.removeChild(promptContainerDivEl.lastChild);
     pEl.remove();
     buttonEl.remove();
+    choiceContainerEl.remove();
 
     //collect most recent
     quizTakenCounter = JSON.parse(localStorage.getItem("quizTakenCounter"));
@@ -247,6 +249,7 @@ var displayHighScore = function() {
     backButtonEl.addEventListener('click', refreshBrowser);
     clearButtonEl.addEventListener('click', clearStorage);
 
+    aViewHighScoreTag.removeEventListener('click', displayHighScore);
 };
 
 var refreshBrowser = function() {
