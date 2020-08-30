@@ -3,7 +3,8 @@ var h1El = document.querySelector('#main');
 var pEl = document.querySelector('#secondary');
 var choiceContainerEl = document.querySelector('.btn');
 var timerEl = document.querySelector('#timer');
-var promptContainerDivEl = document.querySelector('#prompt-container')
+var promptContainerDivEl = document.querySelector('#prompt-container');
+var aViewHighScoreTag = document.querySelector('#viewHS');
 
 var questionArray = [
     {
@@ -238,9 +239,6 @@ var highScoreHandler = function(){
     buttonContainerEl.appendChild(backButtonEl);
     buttonContainerEl.appendChild(clearButtonEl);
 
-
-    
-
     promptContainerDivEl.appendChild(highScoreConainterEl);
 
     promptContainerDivEl.appendChild(buttonContainerEl)
@@ -262,3 +260,4 @@ var clearStorage = function(){
 
 buttonEl.addEventListener('click', startQuizHandler);
 choiceContainerEl.addEventListener('click', checkAnswerHandler);
+aViewHighScoreTag.addEventListener('click', highScoreHandler);
