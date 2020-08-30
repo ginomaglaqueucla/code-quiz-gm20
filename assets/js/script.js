@@ -179,6 +179,7 @@ var highScoreHandler = function(){
     var buttonContainerEl = document.createElement('div');
 
     var pHighScoresListEl = document.createElement('p');
+    var pHighScoresListTempEl = document.createElement('p');
     var backButtonEl = document.createElement('span');
     var clearButtonEl = document.createElement('span');
 
@@ -192,7 +193,7 @@ var highScoreHandler = function(){
     };
 
     // display array
-    var diplayScoresArray = [];
+    var displayArray = [];
 
     //add new score and initials to array
    var localStorageContents = localStorage.getItem("highScores");
@@ -218,12 +219,14 @@ var highScoreHandler = function(){
     highScoreConainterEl.appendChild(pHighScoresListEl);
 
     for(var i = 1; i < highScoresArray.length; i++) {
-        
-        pHighScoresListEl.textContent = i+". " +highScoresArray[i].user + " - " +highScoresArray[i].scoreSaved;
-        highScoreConainterEl.appendChild(pHighScoresListEl);
-        promptContainerDivEl.appendChild(highScoreConainterEl);
-
+        pHighScoresListTempEl.textContent = i+1+". " +highScoresArray[i].user + " - " +highScoresArray[i].scoreSaved;
+        displayArray[i] = pHighScoresListTempEl;
+        highScoreConainterEl.appendChild(displayArray[i]);
     }
+
+    // highScoreConainterEl.appendChild(pHighScoresListEl);
+    promptContainerDivEl.appendChild(highScoreConainterEl);
+
     backButtonEl.innerHTML = "<button id='go-back' type='submit'>Go Back</button>"
     clearButtonEl.innerHTML = "<button id='clear' type='submit'>Clear Scores</button>"
     buttonContainerEl.appendChild(backButtonEl);
