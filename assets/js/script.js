@@ -183,8 +183,7 @@ var highScoreHandler = function(){
     // increment quiz counter
     quizTakenCounter++;
     localStorage.setItem("quizTakenCounter", JSON.stringify(quizTakenCounter));
-
-    console.log("In high score");
+    
     var highScoreConainterEl = document.createElement('div');
     highScoreConainterEl.className = 'high-scores';
     var buttonContainerEl = document.createElement('div');
