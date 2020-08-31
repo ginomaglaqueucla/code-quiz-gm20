@@ -1,14 +1,22 @@
+// start quiz button
 var buttonEl =  document.querySelector('#start-quiz');
+// main prompt
 var h1El = document.querySelector('#main');
+// Instructions
 var pEl = document.querySelector('#secondary');
+// Choice Button container
 var choiceContainerEl = document.querySelector('#btn-container');
+// timer
 var timerEl = document.querySelector('#timer');
+// main container
 var promptContainerDivEl = document.querySelector('#prompt-container');
+// View High Score
 var aViewHighScoreTag = document.querySelector('#viewHS');
+// results
 var resultEl = document.createElement('div');
 resultEl.className ='result';
 
-
+// Question Array
 var questionArray = [
     {
     question: "Which of the following styles a web application?",
@@ -52,27 +60,22 @@ var questionArray = [
     },
 ];
 
-var highScoresArray = [{}
-
-];
 
 var choicesButtonArray = [];
 var quizTakenCounter;
 var questionCounter = 0;
-var startQuizFlag = false;
 var timeEndFlag = false;
 var timeLeft = 0;
 var score = 0;
 
-
+// Handles when start quiz button is clicked
 var startQuizHandler = function() {
 
-  //  localStorage.setItem("quizTakenCounter", JSON.stringify(quizTakenCounter));
-    // remove start quiz button
+    // Remove start quiz button
     buttonEl.remove();
-
-    // remove instructions prompt
+    // Remove instructions prompt
     pEl.remove();
+
     // create choice buttons
     var choiceButton1El = document.createElement('button');
     choiceButton1El.className = "btn choice-btn";
@@ -82,34 +85,36 @@ var startQuizHandler = function() {
     choiceButton3El.className = "btn choice-btn";
     var choiceButton4El = document.createElement('button');
     choiceButton4El.className = "btn choice-btn";
-
+    // Assign to array
     choicesButtonArray = [
         choiceButton1El, choiceButton2El, choiceButton3El, choiceButton4El
     ];
 
-    // Initialize first question and timer
-    // displayQuestion(choicesButtonArray);
+    // Initialize timer
     timeLeft = 75
     timer();
 
-    // start timer and set up following questions
+    // start timer and stop accordingly
     var timeInterval = setInterval(function() {
         timer();
         endQuizCheck();
         if(timeEndFlag) {
             clearInterval(timeInterval);
         }
-
     }, 1000)
+    // Display first question and choice buttons
     displayQuestion();
 };
 
+// Displays questions and choice buttons
 var displayQuestion = function() {
 
+    // checks if there are any questions left
     if (questionCounter < questionArray.length){
-        // Display question
+        // Assign and Display question
         h1El.textContent = questionArray[questionCounter].question;
 
+        // Assign and Display choice buttons
         choicesButtonArray[0].textContent = questionArray[questionCounter].choices[0];
         choiceContainerEl.appendChild(choicesButtonArray[0]);
 
@@ -125,23 +130,22 @@ var displayQuestion = function() {
     } else {
         timeLeft = 0;
     }
+    // Listens for any choice button click
     choicesButtonArray[0].addEventListener('click', checkAnswerHandler);
     choicesButtonArray[1].addEventListener('click', checkAnswerHandler);
     choicesButtonArray[2].addEventListener('click', checkAnswerHandler);
     choicesButtonArray[3].addEventListener('click', checkAnswerHandler);
 };
 
+// Handles when choice button is clicked - checks answer
 var checkAnswerHandler = function(event) {
-
-    // resultEl.remove();
-
     // grab user answer from button click
     var userAnswer = event.target;
-    console.log(userAnswer);
 
     // correct answer
     var correctAnswer = questionArray[questionCounter].answer;
 
+    // increment question array index counter
     questionCounter++;
 
     // check if answer is correct
@@ -155,7 +159,9 @@ var checkAnswerHandler = function(event) {
         console.log("BAD");
         resultEl.textContent = 'Wrong!'
     }
+    // Display Result
     promptContainerDivEl.appendChild(resultEl);
+    // Prompt next question
     displayQuestion();
 }
 
@@ -172,13 +178,13 @@ var endQuizCheck = function() {
     }
 };
 
+// When timer goes to 0 or if there are no more questions in the array
 var endQuiz = function() {
+    // remove choice buttons
     choiceContainerEl.remove();
 
     // New element for display score
     var pScoreEl = document.createElement('p');
-    // place class name here for styling
-    // *** PLACE CODE HERE ****
 
     // New element to submit high score container
     var divInputInitialsConatinerEl = document.createElement('div')
