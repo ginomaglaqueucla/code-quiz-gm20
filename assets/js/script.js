@@ -5,6 +5,8 @@ var choiceContainerEl = document.querySelector('#btn-container');
 var timerEl = document.querySelector('#timer');
 var promptContainerDivEl = document.querySelector('#prompt-container');
 var aViewHighScoreTag = document.querySelector('#viewHS');
+var resultEl = document.createElement('div');
+resultEl.className ='result';
 
 
 var questionArray = [
@@ -90,13 +92,10 @@ var startQuizHandler = function() {
 
     }, 1000)
     displayQuestion();
-
-
-
 };
 
 var displayQuestion = function() {
-    
+
     if (questionCounter < questionArray.length){
         // Display question
         h1El.textContent = questionArray[questionCounter].question;
@@ -112,10 +111,10 @@ var displayQuestion = function() {
 
         choicesButtonArray[3].textContent = questionArray[questionCounter].choices[3];
         choiceContainerEl.appendChild(choicesButtonArray[3]);
+
     } else {
         timeLeft = 0;
     }
-
     choicesButtonArray[0].addEventListener('click', checkAnswerHandler);
     choicesButtonArray[1].addEventListener('click', checkAnswerHandler);
     choicesButtonArray[2].addEventListener('click', checkAnswerHandler);
@@ -123,6 +122,9 @@ var displayQuestion = function() {
 };
 
 var checkAnswerHandler = function(event) {
+
+    // resultEl.remove();
+
     // grab user answer from button click
     var userAnswer = event.target;
     console.log(userAnswer);
@@ -137,17 +139,21 @@ var checkAnswerHandler = function(event) {
     // } else {
     //     questionCounter++;
     // }
+
     questionCounter++;
 
     // check if answer is correct
     if (userAnswer.textContent === correctAnswer){
         score++;
         console.log("Good");
+        resultEl.textContent = 'Correct!';
     }
     else {
         timeLeft = timeLeft - 5;
         console.log("BAD");
+        resultEl.textContent = 'Wrong!'
     }
+    promptContainerDivEl.appendChild(resultEl);
     displayQuestion();
 }
 
@@ -189,7 +195,6 @@ var endQuiz = function() {
     var submitButton = document.querySelector('#submit-score');
 
     submitButton.addEventListener('click', highScoreHandler);
-
 };
 
 var highScoreHandler = function(){
