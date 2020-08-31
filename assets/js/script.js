@@ -188,36 +188,42 @@ var endQuiz = function() {
 
     // New element to submit high score container
     var divInputInitialsConatinerEl = document.createElement('div')
+    
     // New elements to enter initials
-    var pFixedMsg = document.createElement('p');
     var pInput = document.createElement('p');
-     
+    
+    // All Done message
     h1El.textContent = "All Done!";
+    // Final score
     pScoreEl.textContent = "Your final score: " + score;
+    // Initial input and submit button
     pInput.innerHTML = "Enter Initials: <input type='text' name='initials' class='text-input'/><button class='btn' id='submit-score' type='submit'>Submit</button>"
 
+    // append elements to display
     divInputInitialsConatinerEl.appendChild(pScoreEl);
     divInputInitialsConatinerEl.appendChild(pInput);
     promptContainerDivEl.appendChild(divInputInitialsConatinerEl);
 
+    // Listen for when submit button is clicked
     var submitButton = document.querySelector('#submit-score');
-
     submitButton.addEventListener('click', highScoreHandler);
 };
 
+// Handles when submit button is clicked - new score inputted
 var highScoreHandler = function(){
     event.preventDefault();
-    
+
     //collect most recent
     quizTakenCounter = JSON.parse(localStorage.getItem("quizTakenCounter"));
     // increment quiz counter
     quizTakenCounter++;
+    // store 
     localStorage.setItem("quizTakenCounter", JSON.stringify(quizTakenCounter));
 
     // grab user initials input
     var initialsInput = document.querySelector("input[name='initials']").value;
 
-    // index where to add new entry
+    // temp object
     var tempObject = {
         user: initialsInput,
         scoreSaved: score
@@ -226,12 +232,14 @@ var highScoreHandler = function(){
     // store local
     localStorage.setItem("highScores"+quizTakenCounter, JSON.stringify(tempObject));
 
+    // display high score
     displayHighScore();
 }
 
+// Displays high score after new score has been stored or view high score link clicked
 var displayHighScore = function() {
     console.log(event);
-    // remove HTML
+    // remove unwanted HTML
     promptContainerDivEl.removeChild(promptContainerDivEl.lastChild);
     pEl.remove();
     buttonEl.remove();
@@ -240,7 +248,6 @@ var displayHighScore = function() {
     //collect most recent
     quizTakenCounter = JSON.parse(localStorage.getItem("quizTakenCounter"));
 
-    console.log("In highscore");
     // container for High Score List
     var highScoreContainerEl = document.createElement('div');
     highScoreContainerEl.className = 'high-scores';
@@ -262,12 +269,14 @@ var displayHighScore = function() {
         highScoreContainerEl.appendChild(pHSEntryEl);
     }
 
+    // append to display
     promptContainerDivEl.appendChild(highScoreContainerEl);
 
-    // defining buttons
+    // defining go back and clear buttons
     backButtonEl.innerHTML = "<button class='btn' id='go-back' type='submit'>Go Back</button>"
     clearButtonEl.innerHTML = "<button class='btn' id='clear' type='submit'>Clear Scores</button>"
    
+    // append to display
     buttonContainerEl.appendChild(backButtonEl);
     buttonContainerEl.appendChild(clearButtonEl);
     promptContainerDivEl.appendChild(buttonContainerEl)
@@ -276,13 +285,15 @@ var displayHighScore = function() {
     backButtonEl.addEventListener('click', refreshBrowser);
     clearButtonEl.addEventListener('click', clearStorage);
 
+    // remove listener for view high score link
     aViewHighScoreTag.removeEventListener('click', displayHighScore);
 };
-
+// "Go Back"
 var refreshBrowser = function() {
     location.reload(true);
 };
 
+// "Clear Storage"
 var clearStorage = function(){
     localStorage.clear();
     var highScoreConainterEl = document.querySelector('.high-scores');
