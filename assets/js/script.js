@@ -55,7 +55,7 @@ var questionArray = [
     },
     {
     question: "Methods are also referred to as?",
-    choices: ["1.functions", "2. groups", "3. blocks", "4. Lettuce"],
+    choices: ["1. functions", "2. groups", "3. blocks", "4. Lettuce"],
     answer: "1. functions"
     },
 ];
@@ -244,6 +244,7 @@ var displayHighScore = function() {
     pEl.remove();
     buttonEl.remove();
     choiceContainerEl.remove();
+    resultEl.remove();
 
     //collect most recent
     quizTakenCounter = JSON.parse(localStorage.getItem("quizTakenCounter"));
