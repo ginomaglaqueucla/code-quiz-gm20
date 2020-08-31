@@ -39,7 +39,17 @@ var questionArray = [
     question: "Which HTML element results in bigger text",
     choices: ["1. <h1>", "2. <h2>", "3. <h3>", "4. Watermelon"],
     answer: "1. <h1>"
-    }
+    },
+    {
+    question: "Which of the following is not a HTML element?",
+    choices: ["1. <h1>", "2. <section>", "3. <footer>", "4. Peach"],
+    answer: "4. Peach"
+    },
+    {
+    question: "Methods are also referred to as?",
+    choices: ["1.functions", "2. groups", "3. blocks", "4. Lettuce"],
+    answer: "1. functions"
+    },
 ];
 
 var highScoresArray = [{}
@@ -132,14 +142,6 @@ var checkAnswerHandler = function(event) {
     // correct answer
     var correctAnswer = questionArray[questionCounter].answer;
 
-    // Will increment counter after first question
-    // if (!startQuizFlag) {
-    //     startQuizFlag = true;
-    //     return;
-    // } else {
-    //     questionCounter++;
-    // }
-
     questionCounter++;
 
     // check if answer is correct
@@ -185,7 +187,7 @@ var endQuiz = function() {
     var pInput = document.createElement('p');
      
     h1El.textContent = "All Done!";
-    pScoreEl.textContent = "Your final score:" + score;
+    pScoreEl.textContent = "Your final score: " + score;
     pInput.innerHTML = "Enter Initials: <input type='text' name='initials' class='text-input'/><button class='btn' id='submit-score' type='submit'>Submit</button>"
 
     divInputInitialsConatinerEl.appendChild(pScoreEl);
