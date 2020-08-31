@@ -1,3 +1,5 @@
+Code Quiz
+
 Installation:
 
 Go to the following link to take The Code Quiz:
@@ -12,30 +14,30 @@ The Code Quiz is a web application that prompts the user with coding question us
 Usage (Screenshots):
 Main Page
 
-![Main Page](./assets/images/Main-page.png)
+![Main Page](./assets/images/Main-Page.png)
 
 Questions
 
-![Questions](./assets/images/first-prompt.png)
+![Questions](./assets/images/Question.png)
 
 Correct Answer
 
-![Correct Answer](./assets/images/length-prompt.png)
+![Correct Answer](./assets/images/Correct-Answer.png)
 
 Wrong Answer
 
-![Wrong Answer](./assets/images/invalid-length.png)
+![Wrong Answer](./assets/images/Wrong-Answer.png)
 
 Submit Score
 
-![Submit Score](./assets/images/lowercase-prompt.png)
+![Submit Score](./assets/images/Submit-Score.png)
 
 Leaderboard
 
-![Leaderboard](./assets/images/uppercase-prompt.png)
+![Leaderboard](./assets/images/Leaderboard.png)
 
 
-Credits Changes/Commits by: ginomaglaqueucla - (https://github.com/ginomaglaqueucla/friendly-parakeet-gm20.git)
+Credits Changes/Commits by: ginomaglaqueucla - (https://github.com/ginomaglaqueucla/code-quiz-gm20.git)
 
 License MIT License
 
