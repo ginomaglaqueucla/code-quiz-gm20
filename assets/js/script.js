@@ -6,36 +6,37 @@ var timerEl = document.querySelector('#timer');
 var promptContainerDivEl = document.querySelector('#prompt-container');
 var aViewHighScoreTag = document.querySelector('#viewHS');
 
+
 var questionArray = [
     {
     question: "Which of the following styles a web application?",
     choices: ["1. HTML", "2. CSS", "3. JavaScript", "4. Potato"],
-    answer: "CSS"
+    answer: "2. CSS"
     },
     {
     question: "What is the syntax for printing to console?",
     choices: ["1. window.alert()", "2. printToConsole()", "3. console.log()", "4. Tomato"],
-    answer: "console.log()"
+    answer: "3. console.log()"
     },
     {
     question: "Which of the follow is NOT a data type?",
     choices: ["1. String", "2. Object", "3. Array", "4. Cucumber"],
-    answer: "Cucumber"
+    answer: "4. Cucumber"
     },
     {
     question: "How do you declare an Array?",
     choices: ["1. var array = {}", "2. var array = []", "3. var = array[]", "4. Apple"],
-    answer: "var array = []"
+    answer: "3. var array = []"
     },
     {
     question: "What is an example of Camel Casing?",
     choices: ["1. helloworld", "2. HelloWorld", "3. hello_world", "4. helloBanana"],
-    answer: "helloBanana"
+    answer: "4. helloBanana"
     },
     {
     question: "Which HTML element results in bigger text",
     choices: ["1. <h1>", "2. <h2>", "3. <h3>", "4. Watermelon"],
-    answer: "<h1>"
+    answer: "1. <h1>"
     }
 ];
 
@@ -50,7 +51,7 @@ var startQuizFlag = false;
 var timeEndFlag = false;
 var timeLeft = 0;
 var score = 0;
-var initials;
+
 
 var startQuizHandler = function() {
 
@@ -86,12 +87,15 @@ var startQuizHandler = function() {
         if(timeEndFlag) {
             clearInterval(timeInterval);
         }
+
     }, 1000)
-    displayQuestion(choicesButtonArray);
-    
+    displayQuestion();
+
+
+
 };
 
-var displayQuestion = function(choicesButtonArray) {
+var displayQuestion = function() {
     
     if (questionCounter < questionArray.length){
         // Display question
@@ -111,22 +115,29 @@ var displayQuestion = function(choicesButtonArray) {
     } else {
         timeLeft = 0;
     }
+
+    choicesButtonArray[0].addEventListener('click', checkAnswerHandler);
+    choicesButtonArray[1].addEventListener('click', checkAnswerHandler);
+    choicesButtonArray[2].addEventListener('click', checkAnswerHandler);
+    choicesButtonArray[3].addEventListener('click', checkAnswerHandler);
 };
 
 var checkAnswerHandler = function(event) {
     // grab user answer from button click
     var userAnswer = event.target;
+    console.log(userAnswer);
 
     // correct answer
     var correctAnswer = questionArray[questionCounter].answer;
 
     // Will increment counter after first question
-    if (!startQuizFlag) {
-        startQuizFlag = true;
-        return;
-    } else {
-        questionCounter++;
-    }
+    // if (!startQuizFlag) {
+    //     startQuizFlag = true;
+    //     return;
+    // } else {
+    //     questionCounter++;
+    // }
+    questionCounter++;
 
     // check if answer is correct
     if (userAnswer.textContent === correctAnswer){
@@ -137,7 +148,7 @@ var checkAnswerHandler = function(event) {
         timeLeft = timeLeft - 5;
         console.log("BAD");
     }
-    displayQuestion(choicesButtonArray);
+    displayQuestion();
 }
 
 var timer = function() {
@@ -192,8 +203,6 @@ var highScoreHandler = function(){
 
     // grab user initials input
     var initialsInput = document.querySelector("input[name='initials']").value;
-
-    
 
     // index where to add new entry
     var tempObject = {
@@ -268,5 +277,4 @@ var clearStorage = function(){
 };
 
 buttonEl.addEventListener('click', startQuizHandler);
-choiceContainerEl.addEventListener('click', checkAnswerHandler);
 aViewHighScoreTag.addEventListener('click', displayHighScore);
